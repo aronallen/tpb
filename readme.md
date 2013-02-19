@@ -19,3 +19,9 @@ Update name in `package.json` and title in `site/index.html`.
 Then delete this message and describe your project here.
 
 ... and start coding.
+
+
+Using jQuery
+------------
+
+The project template includes both jQuery and Zepto (jQuery replacement for mobile). You can choose to use the library that suits you best. However you must update the `backbone` dependency in `site/main.js` if you're going to use jQuery; it defaults to Zepto.
