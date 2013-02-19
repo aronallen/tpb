@@ -1,4 +1,7 @@
-Begin with (replace `MY-COOL-APP` with your own name):
+Getting started
+===============
+
+Begin with (replace `MY-COOL-APP`):
 
 ```bash
 # Clone this project
