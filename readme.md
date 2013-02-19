@@ -1,13 +1,13 @@
-Begin with:
+Begin with (replace `MY-COOL-APP` with your own name):
 
 ```bash
 # Clone this project
-git clone git@github.com:contingent/new-project.git
-cd new-project/
+git clone git@github.com:contingent/new-project.git MY-COOL-APP
+cd MY-COOL-APP/
 
 # Change git remotes
 git remote rm origin
-git remote add origin ... # insert one from an empty GitHub repo
+git remote add origin git@github.com:contingent/MY-COOL-APP.git # GitHub project name
 
 # Start server
 npm install
