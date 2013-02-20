@@ -12,5 +12,5 @@ Object.keys(pkg.config).forEach(function(key) {
 });
 
 // Special configs:
-config.site_dir = path.normalize(__dirname + '/../' + (config.size_dir || 'site/') + '/.');
+config.site_dir = path.normalize(__dirname + '/../' + (config.site_dir || 'site/') + '/.');
 config.listen_port = (config.listen_port || process.env.PORT || (process.env.NODE_ENV === 'production' ? 80 : 3000)) | 0;

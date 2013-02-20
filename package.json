@@ -17,7 +17,6 @@
 		"npm"  : ">=1"
 	},
 	"config": {
-		"lodash_build": "default",
-		"site_dir": "site/"
+		"lodash_build": "default"
 	}
 }
