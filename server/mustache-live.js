@@ -18,7 +18,7 @@ function compile(options, filename, in_filename, next_step) {
 			fs.readFile(in_filename, 'utf8', next);
 		},
 		function(template, next) {
-			template = template.trim().replace(/(\}\}|>)(?:[\r\n]|\s{2,})(<|\{\{)/g);
+			template = template.trim().replace(/(\}\}|>)(?:[\r\n]|\s{2,})(<|\{\{)/g, '$1$2');
 			var js = mustache_amd.compile(template, {
 				compile_errors: true,
 				underscore: options.underscore,
