@@ -1,7 +1,7 @@
-Getting started
-===============
+Beautiful project template
+==========================
 
-Begin with (replace `MY-COOL-APP`):
+Getting started (replace `MY-COOL-APP`):
 
 ```bash
 # Clone this project
