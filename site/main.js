@@ -18,5 +18,6 @@ require.config({
 });
 
 require([
+	'app/css-auto-update', // TODO: Automatically remove in production bundle.
 	'app/app'
 ]);

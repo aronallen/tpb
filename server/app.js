@@ -13,10 +13,13 @@ process.on('uncaughtException', function(error) {
 
 var config = require('./config');
 var common = require('common');
+var watchr = require('watchr');
 var express = require('express');
 var app = express();
+var path = require('path');
 var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
+var socket = require('socket.io');
+var io = socket.listen(server);
 var amd_bundler;
 
 console.log('Starting ' + app.get('env') + ' server, please wait...');
@@ -70,3 +73,20 @@ common.step([
 		start_server();
 	}
 ]);
+
+// Set up CSS auto updater.
+var style_dir = config.site_dir + '/style';
+watchr.watch({
+	path: style_dir,
+	listeners: {
+		change: function(event, filename, current, previous) {
+			if (event === 'update' && (filename.slice(-4) === '.css' || filename.slice(-5) === '.less') && filename !== style_dir + '/app.css') {
+				filename = path.relative(style_dir, filename);
+				console.log('Style sheet ' + filename + ' updated.');
+				io.of('/css-auto-update').emit('update', filename);
+			}
+		}
+	},
+	ignoreHiddenFiles: true,
+	ignoreCommonPatterns: true
+});
