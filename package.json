@@ -17,6 +17,6 @@
 		"npm"  : ">=1"
 	},
 	"config": {
-		"lodash_build": "default"
+		"lodash_build": "mobile"
 	}
 }
