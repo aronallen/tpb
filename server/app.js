@@ -15,6 +15,8 @@ var config = require('./config');
 var common = require('common');
 var express = require('express');
 var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
 var amd_bundler;
 
 console.log('Starting ' + app.get('env') + ' server, please wait...');
@@ -35,7 +37,7 @@ function start_server() {
 		app.use(express.errorHandler());
 	});
 
-	app.listen(config.listen_port);
+	server.listen(config.listen_port);
 	console.log('Started ' + config.name + '@' + config.version + ' on port ' + config.listen_port);
 }
 
