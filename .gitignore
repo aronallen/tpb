@@ -1,6 +1,7 @@
 .DS_Store
 npm-debug.log
 node_modules/
+site/main-built.js
 site/style/app.css
 .npmrc
 *.mustache.js

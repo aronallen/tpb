@@ -10,7 +10,10 @@
 		"lodash": "1.x",
 		"connect-less": "0.3.x",
 		"glob": "3.x",
-		"watchr": "2.x"
+		"watchr": "2.x",
+		"requirejs": "2.x",
+		"common": "0.2.x",
+		"stack-formatted": "0.1.x"
 	},
 	"engines": {
 		"node" : ">=0.8",
