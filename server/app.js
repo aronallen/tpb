@@ -1,8 +1,16 @@
 #!/usr/bin/env node
 
+// Ensure we start out in project root directory.
+process.chdir(__dirname + '/../');
+
 var config = require('./config');
 var express = require('express');
 var app = express();
+
+require('./lodash-builder').build({
+	type: config.lodash_build,
+	file: 'site/libs/lodash/lodash.js'
+});
 
 require('./mustache-live').watch({
 	src: config.site_dir,
