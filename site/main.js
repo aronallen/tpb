@@ -11,7 +11,6 @@ require.config({
 	},
 
 	shim: {
-		'lodash'	 : { exports: '_'} 
 		'backbone' : { exports: 'Backbone', deps: ['lodash', 'zepto'] },
 		'zepto'    : { exports: 'Zepto' }
 	}
