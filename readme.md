@@ -11,6 +11,7 @@ cd MY-COOL-APP/
 # Change git remotes
 git remote rm origin
 git remote add origin git@github.com:contingent/MY-COOL-APP.git # GitHub project name
+git push -u origin master
 
 # Start server
 npm install
