@@ -30,7 +30,7 @@ lodash_builder.build = function(options) {
 					fs.writeFile(b.outputPath, b.source);
 				}
 				if (b.sourceMap) {
-					fs.writeFile(b.outputPath.replace(/\.js$/, '') + '.map', b.sourceMap);
+					fs.writeFile(b.outputPath.replace(/\.js$/, '') + '.map', JSON.stringify(JSON.parse(b.sourceMap)));
 				}
 			});
 		}
