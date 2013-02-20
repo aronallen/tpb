@@ -3,3 +3,4 @@ npm-debug.log
 node_modules/
 site/style/app.css
 .npmrc
+*.mustache.js

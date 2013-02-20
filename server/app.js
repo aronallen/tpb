@@ -4,6 +4,12 @@ var config = require('./config');
 var express = require('express');
 var app = express();
 
+require('./mustache-live').watch({
+	src: config.site_dir,
+	root: 'templates',
+	underscore: 'lodash'
+});
+
 app.configure(function() {
 	//app.use(express.logger());
 	app.use(express.compress());
