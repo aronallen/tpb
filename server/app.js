@@ -32,7 +32,7 @@ function start_server() {
 		app.use(express.compress());
 		app.use(require('connect-less')({ src: config.site_dir }));
 		app.configure('production', function() {
-			app.use(amd_bundler.connect('/libs/require/require.min.js', fileOptions));
+			app.use(amd_bundler.connect('/libs/require/require.js', fileOptions));
 		});
 		app.use(express['static'](config.site_dir, fileOptions));
 		app.use(express.bodyParser());
@@ -63,7 +63,7 @@ common.step([
 
 		amd_bundler = require('./amd-bundler').bundle({
 			src: config.site_dir,
-			loader: 'libs/require/almond.min.js',
+			loader: 'libs/require/almond.js',
 			next: function() {
 				next(); // Ignore potential errors in first AMD bundle, so the server starts.
 			}
