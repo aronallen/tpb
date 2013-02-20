@@ -33,7 +33,7 @@ The templates are automatically compiled on server-side for optimal performance.
 ```javascript
 define([
 	'zepto',
-	'templates/user-board'
+	'templates/user-board.mustache'
 ], function($, user_board) {
 
 	// The user_board function returns the resulting HTML when passed a view object.
