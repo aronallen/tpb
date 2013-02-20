@@ -1,4 +1,4 @@
 /*globals define:true*/
-define(function(readme) {
+define(function() {
 	console.log('Hello, app!');
 });
