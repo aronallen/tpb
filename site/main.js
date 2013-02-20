@@ -10,7 +10,8 @@ require.config({
 	},
 
 	shim: {
-		'backbone' : { exports: 'Backbone', deps: ['lodash', 'zepto'] }
+		'backbone' : { exports: 'Backbone', deps: ['lodash', 'zepto'] },
+		'zepto'    : { exports: 'Zepto' }
 	}
 
 });
