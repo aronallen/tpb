@@ -16,6 +16,7 @@ function compile(options, filename, in_filename) {
 			return;
 		}
 
+		template = template.trim().replace(/(\}\}|>)(?:[\r\n]|\s{2,})(<|\{\{)/g;
 		var js = mustache_amd.compile(template, {
 			compile_errors: true,
 			underscore: options.underscore,
