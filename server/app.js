@@ -30,7 +30,10 @@ function start_server() {
 		} : null;
 
 		app.use(express.compress());
-		app.use(require('connect-less')({ src: config.site_dir }));
+		app.use(require('connect-less')({
+			src: config.site_dir,
+			compress: app.get('env') === 'production'
+		}));
 		app.configure('production', function() {
 			app.use(amd_bundler.connect('/libs/require/require.js', fileOptions));
 		});
