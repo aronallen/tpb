@@ -44,9 +44,15 @@ amd_bundler.bundle = function(options) {
 		optimize       : 'uglify2',
 		inlineText     : true,
 		wrap           : { startFile: options.loader },
+		paths          : {
+			'app/css-auto-update' : 'empty:', // Do not include CSS auto updater
+			'socket.io'           : path.dirname(require.resolve('socket.io')) + '/node_modules/socket.io-client/dist/socket.io'
+		},
+
 		_outFilename   : path.normalize(options.src + '/' + options.out),
 		_buildMsg      : 'Bundling ' + path.basename(options.out),
 		_builtJS       : jsLogError('AMD / Require.JS bundle not built yet!'),
+
 		out            : function(js) {
 			fs.writeFile(config._outFilename, js, 'utf8', function(error) {
 				if (error) {
