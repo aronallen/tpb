@@ -158,6 +158,7 @@ function compile_block(tokens, options) {
 				name: subname,
 				reserved_names: reserved_names
 			});
+			reserved_names.push(subname);
 			if (compiled.error) {
 				return compiled;
 			}
