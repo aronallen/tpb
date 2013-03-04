@@ -5,6 +5,7 @@ var mustache_amd = exports;
 var mustache_tokens = /\{\{\{.*?\}\}\}|\{\{.*?\}\}|[^\{]+|[\s\S]/g;
 var mustache_tag_token = /^\{\{([#\/&\^>])?\s*(\S+)\s*\}\}$/;
 var mustache_tag_name = /^[\w\-]+$/;
+var mustache_tag_path = /^[\w\-\.\/]+$/;
 
 function parse_tokens(template) {
 	var error;
@@ -67,7 +68,7 @@ function parse_tokens(template) {
 						}
 						name = matches[2];
 					}
-					if (!mustache_tag_name.test(name)) {
+					if (!(mustache_tag_name.test(name) || (type === 'partial' && mustache_tag_path.test(name)))) {
 						return error('invalid_tag_name', 'Tag name contains invalid characters in ' + text + '.');
 					}
 					tokens.push({
@@ -172,8 +173,11 @@ function compile_block(tokens, options) {
 			i += compiled.parsed_tokens + 1;
 		} else if (token.type === 'partial') {
 			used_object = true;
-			var filename = path.basename(token.name, '.mustache');
-			var arg = ('' + filename).replace(/-/g, '_');
+			var filename = token.name;
+			var arg = ('' + filename).replace(/\.(?:mustache|md)$/g, '').replace(/\W+/g, '_').replace(/^_+|_+$/g, '');
+			if (filename.slice(-9) !== '.mustache' && filename.slice(-3) !== '.md') {
+				filename += '.mustache';
+			}
 			partials[arg] = filename;
 			part = arg + '(o)+';
 		} else if (token.type === 'end') {
@@ -250,13 +254,13 @@ function compile(template, options) {
 	var modules = compiled.partials;
 
 	Object.keys(modules).forEach(function(m) {
-		modules[m] = path.normalize(root + modules[m] + '.mustache');
+		modules[m] = path.normalize(root + modules[m]);
 	});
 
 	var prefix = '/*globals define:true*/ // Generated on ' + new Date().toISOString() + '\n';
 	var postfix = '\n});';
 	if (compiled.used_block) {
-		js = 'function m(o,r,t,b){return !o?"":_.isArray(o)?o.map(b).join(""):_.isObject(o)?b(o):_.isFunction(o)?o(t):b(r);}\n' + js;
+		js = 'function m(o,r,t,b){return !o?"":_.isArray(o)?o.map(b).join(""):_.isFunction(o)?o(t,b(r)):_.isObject(o)?b(o):b(r);}\n' + js;
 	}
 	if (compiled.used_var) {
 		js =
