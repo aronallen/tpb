@@ -45,7 +45,7 @@ amd_bundler.bundle = function(options) {
 		inlineText     : true,
 		wrap           : { startFile: options.loader },
 		paths          : {
-			'app/css-auto-update' : 'empty:', // Do not include CSS auto updater
+			'app/css-auto-update' : __dirname + '/empty-amd-module', // Do not include CSS auto updater
 			'socket.io'           : path.dirname(require.resolve('socket.io')) + '/node_modules/socket.io-client/dist/socket.io'
 		},
 
