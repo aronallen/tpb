@@ -5,10 +5,9 @@
 // Ensure we start out in project root directory, because Lo-Dash builder expects it.
 process.chdir(__dirname + '/../');
 
-// Better stack traces.
-require('stack-formatted');
+// Do not halt server on uncaugt exceptions.
 process.on('uncaughtException', function(error) {
-	console.log(error.stackFormatted);
+	console.log(error.stack);
 });
 
 var config = require('./config');

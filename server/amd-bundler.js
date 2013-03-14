@@ -18,7 +18,7 @@ function bundle(config, next_step) {
 		if (typeof(response) !== 'string') {
 			// Error occurred: response is error object.
 			var error = response;
-			console.error(config._buildMsg + ': Failed. ' + (error.stackFormatted || error));
+			console.error(config._buildMsg + ': Failed. ' + (error.stack || error));
 			config._builtJS = jsLogError(config._buildMsg + ': Failed. ' + error);
 			next_step(error);
 		}
@@ -56,7 +56,7 @@ amd_bundler.bundle = function(options) {
 		out            : function(js) {
 			fs.writeFile(config._outFilename, js, 'utf8', function(error) {
 				if (error) {
-					console.error(config._buildMsg + ': Failed. ' + (error.stackFormatted || error));
+					console.error(config._buildMsg + ': Failed. ' + (error.stack || error));
 					config._builtJS = jsLogError(config._buildMsg + ': Failed. ' + error);
 					config._next && config._next(error);
 					return;
@@ -71,6 +71,9 @@ amd_bundler.bundle = function(options) {
 
 	common.step([
 		function(next) {
+			bundle(config, next);
+		},
+		function(next) {
 			watchr.watch({
 				path: config.baseUrl,
 				listeners: {
@@ -84,9 +87,6 @@ amd_bundler.bundle = function(options) {
 				ignoreCommonPatterns: true,
 				next: next
 			});
-		},
-		function(watcher_instance, next) {
-			bundle(config, next);
 		},
 		function() {
 			options.next();
