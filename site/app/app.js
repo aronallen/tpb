@@ -15,7 +15,7 @@ define(['backbone', 'app/books', 'collections/books', 'views/sections', 'views/b
       '' : 'home'
     },
     book : function(book){
-
+      window.scrollTo(0,0);
       var b = _.find(_.flatten(_.pluck(App.sections,'models')), function(m){
         return m.get('nick') === book;
       });
@@ -26,7 +26,7 @@ define(['backbone', 'app/books', 'collections/books', 'views/sections', 'views/b
       $("body").empty().append(view.el);
     },
     chapter : function(book, chapter){
-      
+      window.scrollTo(0,0);
       var chapters = _.flatten(_.pluck(_.pluck(_.flatten(_.pluck(App.sections,'models')), 'chapters'), 'models'));
       var chapter  = _.find(chapters, function(m){
         return m.get('nick') === book && m.get('chapter') == chapter;
@@ -40,6 +40,7 @@ define(['backbone', 'app/books', 'collections/books', 'views/sections', 'views/b
 
     },
     home : function(){
+      window.scrollTo(0,0);
       $("body").empty();
       _.each(App.sections, function(section){
           var view = new SectionView({collection : section});

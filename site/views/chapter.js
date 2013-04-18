@@ -23,14 +23,14 @@ define(['zepto', 'lodash', 'backbone'], function($,_,BB){
       var chap = this.model.collection.models[n];
 
       if(chap){
-        window.location.hash = 'book/' +  chap.get('nick') + '/' + chap.get('chapter');
+        App.router.navigate( 'book/' +  chap.get('nick') + '/' + chap.get('chapter'), {replace : true, trigger: true});
       }
     },
 
     'className' : 'content',
     'initialize' : function(){
       this.model.bind('change:content', this.render, this);
-      if(this.model.has('content')) this.render();
+      this.render();
     },
     'render' : function(){
 
