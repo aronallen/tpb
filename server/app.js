@@ -29,7 +29,8 @@ var opts = {
     'hostnameOnly' : true
 };
 var proxy = httpProxy.createServer(opts, function(req, res, proxy) {
-    console.log(req.url);
+
+    req.headers.host = 'old.bibelselskabet.dk';
     proxy.proxyRequest(req, res, {
         host: 'old.bibelselskabet.dk',
         port: 80

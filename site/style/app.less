@@ -1,4 +1,68 @@
 // Eric Meyer's "Reset CSS"
 @import "reset";
 
+@unit: 15px;
+
+body{
+  font-family: 'Helvetica', sans-serif;
+}
+h1{
+  font-size: @unit;
+  line-height: @unit * 1.5;
+  background: black;
+  width: 100%;
+  color:#fff;
+  padding:@unit/3*2;
+  box-sizing:border-box;
+}
+.row{
+  background: #ddd;
+
+  &:nth-child(odd){
+  background: #eee;
+  }
+  &:hover{
+    background: #444;
+    color:#eee;
+    cursor:pointer;
+  }
+  height: @unit * 3;
+  overflow: hidden;
+}
+
+.content{
+  padding:0 10px;
+  p{
+    font-size: @unit;
+    line-height: @unit * 1.5;
+    margin-bottom: @unit;
+  }
+  a{
+    color: inherit;
+    font-weight: bold;
+  }
+  h2{
+    font-style: italic;
+  }
+}
+.ref{
+  font-style: normal !important;
+  text-transform: uppercase;
+  line-height: @unit * 2;
+  text-align: center;
+  padding:0 10px;
+  margin:0 -10px;
+  background: black;
+  color:white;
+}
+h2{
+  
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size: @unit;
+  padding:@unit/2;
+  line-height: @unit * 2;
+}
+
 // Here become your styles!

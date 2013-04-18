@@ -1,10 +1,55 @@
 /*globals define:true*/
-define(['app/books', 'models/book'], function(books,Book){
+define(['backbone', 'app/books', 'collections/books', 'views/sections', 'views/book', 'views/chapter'], function(BB, sections,Books,SectionView,BookView,ChapterView){
 
-  var moses = _.first(_.first(books).books);
-  console.log(moses);
+  window.App = {};
+  App.sections = {};
+  _.each(sections, function(section){
+    App.sections[section.nick] = new Books(section.books);
+    App.sections[section.nick].name = section.name;
+  });
 
-  window.b = new Book(moses);
-  console.log(b);
+  var Router = BB.Router.extend({
+    'routes' : {
+      'book/*book/:chapter' : 'chapter',
+      'book/*book' : 'book',
+      '' : 'home'
+    },
+    book : function(book){
+
+      var b = _.find(_.flatten(_.pluck(App.sections,'models')), function(m){
+        return m.get('nick') === book;
+      });
+
+      var view = new BookView({model : b})
+      view.render();
+
+      $("body").empty().append(view.el);
+    },
+    chapter : function(book, chapter){
+      
+      var chapters = _.flatten(_.pluck(_.pluck(_.flatten(_.pluck(App.sections,'models')), 'chapters'), 'models'));
+      var chapter  = _.find(chapters, function(m){
+        return m.get('nick') === book && m.get('chapter') == chapter;
+      })
+      
+      chapter.load();
+
+      var view = new ChapterView({model : chapter});
+
+      $("body").empty().append(view.el);
+
+    },
+    home : function(){
+      $("body").empty();
+      _.each(App.sections, function(section){
+          var view = new SectionView({collection : section});
+          view.render();
+          $("body").append(view.el);
+      });
+    }
+  });
+
+  App.router = new Router();
+  BB.history.start()
 
 });
