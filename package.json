@@ -1,6 +1,6 @@
 {
 	"private" : true,
-	"name": "NEW-PROJECT",
+	"name": "Bibelen",
 	"version": "0.1.0",
 	"scripts": {
 		"start": "./server/app.js"

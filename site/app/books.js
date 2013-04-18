@@ -408,5 +408,5 @@ var NT = {
     ]
 };
 //return all books;
-return [GT, NT, AP];
+return [NT, GT, AP];
 });
